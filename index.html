@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advanced Urdu Scrolling Text Video Generator - Create unique, monetization-friendly YouTube videos with custom text scrolling effects. Professional tool for content creators.">
+    <meta name="keywords" content="Urdu text generator, scrolling text video, YouTube video generator, Urdu content creator, text animation, video creation tool, free video generator">
+    <meta name="author" content="Urdu Video Generator">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:title" content="Urdu Scrolling Text Video Generator">
+    <meta property="og:description" content="Create professional Urdu scrolling text videos optimized for YouTube monetization. Free online tool with custom fonts, colors, and animations.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://jamamjadalone.github.io/urdu-scrolling-video-generator/assets/og-image.png">
+    <meta property="og:url" content="https://jamamjadalone.github.io/urdu-scrolling-video-generator/">
+    <meta name="theme-color" content="#007bff">
+    <link rel="canonical" href="https://jamamjadalone.github.io/urdu-scrolling-video-generator/">
+    <title>Advanced Urdu Scrolling Text Video Generator | Free Online Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        h1 { color: #667eea; font-size: 32px; margin-bottom: 10px; }
+        .tagline { color: #666; font-size: 16px; }
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .panel {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .panel h2 { color: #667eea; margin-bottom: 20px; font-size: 22px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; color: #333; }
+        input[type="text"], input[type="color"], input[type="range"], input[type="url"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="color"]:focus, input[type="range"]:focus, input[type="url"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+        }
+        textarea { resize: vertical; min-height: 100px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .tab-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        #display-area {
+            background: #f0f0f0;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            resize: both;
+            border: 3px solid #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        .display-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        #scrollingText {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-primary:hover { background: #764ba2; transform: translateY(-2px); }
+        .btn-secondary {
+            background: #f8f9ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        .btn-secondary:hover { background: #667eea; color: white; }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            display: none;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+        }
+        .play-button:hover { background: #764ba2; transform: translate(-50%, -50%) scale(1.05); }
+        .play-button.show { display: block; }
+        .range-display {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #667eea;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            padding-top: 15px;
+            border-top: 2px solid #eee;
+        }
+        .flex-container { display: flex; gap: 15px; flex-wrap: wrap; }
+        .flex-item { flex: 1; min-width: 150px; }
+        .info-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        @keyframes borderGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(118, 75, 162, 0.8); }
+        }
+        .border-animated { animation: borderGlow 2s infinite; }
+        @media (max-width: 1024px) {
+            main { grid-template-columns: 1fr; }
+        }
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Urdu Scrolling Text Video Generator</h1>
+            <p class="tagline">Professional tool for creating monetization-friendly YouTube videos</p>
+        </header>
+
+        <main>
+            <div class="panel">
+                <h2>📝 Content</h2>
+
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('qa-tab', this)">Q&A Mode</button>
+                    <button class="tab-btn" onclick="switchTab('story-tab', this)">Story Mode</button>
+                </div>
+
+                <div id="qa-tab" class="tab-content active">
+                    <div class="form-group">
+                        <label for="questionText">Question (Q):</label>
+                        <textarea id="questionText" placeholder="Enter your question in Urdu..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="answerText">Answer (A):</label>
+                        <textarea id="answerText" placeholder="Enter your answer in Urdu..."></textarea>
+                    </div>
+                </div>
+
+                <div id="story-tab" class="tab-content">
+                    <div class="form-group">
+                        <label for="storyText">Story Text:</label>
+                        <textarea id="storyText" placeholder="Enter your story in Urdu..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-title">🎨 1. Text Colors</div>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <label for="qColor">Question Color:</label>
+                        <input type="color" id="qColor" value="#ffff00">
+                    </div>
+                    <div class="flex-item">
+                        <label for="aColor">Answer Color:</label>
+                        <input type="color" id="aColor" value="#00ff00">
+                    </div>
+                    <div class="flex-item">
+                        <label for="storyColor">Story Color:</label>
+                        <input type="color" id="storyColor" value="#ffffff">
+                    </div>
+                </div>
+
+                <div class="section-title">✏️ 2. Text Styling</div>
+                <div class="form-group">
+                    <label for="fontSelect">Font Family:</label>
+                    <select id="fontSelect">
+                        <option value="'Jameel Noori Nastaliq'">Jameel Noori Nastaliq</option>
+                        <option value="'Nafees Naskh'">Nafees Naskh</option>
+                        <option value="'Alvi Nastaliq'">Alvi Nastaliq</option>
+                        <option value="'Mehr Nastaliq'">Mehr Nastaliq</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fontSize">Font Size:</label>
+                    <input type="range" id="fontSize" min="20" max="80" step="2" value="48">
+                    <div class="range-display">Current: <span id="fontSizeValue">48</span>px</div>
+                </div>
+
+                <div class="section-title">📏 3. Text Spacing</div>
+                <div class="flex-container">
+                    <div class="flex-item">
+                        <label for="lineHeight">Line Height:</label>
+                        <input type="range" id="lineHeight" min="1" max="3" step="0.1" value="1.8">
+                        <div class="range-display">Current: <span id="lineHeightValue">1.8</span></div>
+                    </div>
+                    <div class="flex-item">
+                        <label for="letterSpacing">Letter Spacing:</label>
+                        <input type="range" id="letterSpacing" min="0" max="10" step="0.5" value="0">
+                        <div class="range-display">Current: <span id="letterSpacingValue">0</span>px</div>
+                    </div>
+                    <div class="flex-item">
+                        <label for="textMargin">Text Margin:</label>
+                        <input type="range" id="textMargin" min="0" max="50" step="5" value="10">
+                        <div class="range-display">Current: <span id="textMarginValue">10</span>px</div>
+                    </div>
+                </div>
+
+                <div class="section-title">🎨 4. Background</div>
+                <div class="form-group">
+                    <label for="bgColor">Background Color:</label>
+                    <input type="color" id="bgColor" value="#000000">
+                </div>
+                <div class="form-group">
+                    <label for="bgImage">Background Image URL:</label>
+                    <input type="url" id="bgImage" placeholder="https://example.com/image.jpg">
+                </div>
+
+                <div class="section-title">⚡ 5. Animation</div>
+                <div class="form-group">
+                    <label for="speedInput">Scroll Speed (15-45):</label>
+                    <input type="range" id="speedInput" min="15" max="45" step="1" value="30">
+                    <div class="range-display">Current: <span id="speedValue">30</span></div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="borderToggle" checked> Enable Border Animation
+                    </label>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-primary" onclick="setupPreview()">Setup Preview</button>
+                    <button class="btn-secondary" onclick="stopScroll()">Stop</button>
+                </div>
+
+                <div class="info-box">
+                    💡 <strong>Workflow:</strong> Enter text → Customize → Click "Setup Preview" → Resize preview → Start screen recorder → Click PLAY
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>👁️ Preview (16:9)</h2>
+                <div id="display-area">
+                    <div class="display-content">
+                        <div id="scrollingText"></div>
+                        <button class="play-button" onclick="startScroll()">▶ PLAY</button>
+                    </div>
+                </div>
+                <div class="info-box" style="margin-top: 15px;">
+                    📌 Drag the corner to resize | Click PLAY to start animation | Record with your screen recorder
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>🚀 <strong>Urdu Scrolling Text Video Generator v1.0</strong> | Created November 25, 2025</p>
+            <p>Perfect for YouTube monetization • Free • No uploads • All content processed locally</p>
+        </footer>
+    </div>
+
+    <script>
+        const scrollingText = document.getElementById('scrollingText');
+        const displayArea = document.getElementById('display-area');
+        const playButton = document.querySelector('.play-button');
+        let currentTab = 'qa-tab';
+        let isPlaying = false;
+
+        // Initialize event listeners
+        document.getElementById('fontSize').addEventListener('input', (e) => {
+            document.getElementById('fontSizeValue').textContent = e.target.value;
+            updatePreview();
+        });
+
+        document.getElementById('speedInput').addEventListener('input', (e) => {
+            document.getElementById('speedValue').textContent = e.target.value;
+        });
+
+        document.getElementById('lineHeight').addEventListener('input', (e) => {
+            document.getElementById('lineHeightValue').textContent = e.target.value;
+            applyTextSpacing();
+        });
+
+        document.getElementById('letterSpacing').addEventListener('input', (e) => {
+            document.getElementById('letterSpacingValue').textContent = e.target.value;
+            applyTextSpacing();
+        });
+
+        document.getElementById('textMargin').addEventListener('input', (e) => {
+            document.getElementById('textMarginValue').textContent = e.target.value;
+            applyTextSpacing();
+        });
+
+        document.getElementById('qColor').addEventListener('change', updatePreview);
+        document.getElementById('aColor').addEventListener('change', updatePreview);
+        document.getElementById('storyColor').addEventListener('change', updatePreview);
+        document.getElementById('fontSelect').addEventListener('change', updatePreview);
+        document.getElementById('bgColor').addEventListener('change', updatePreview);
+        document.getElementById('bgImage').addEventListener('change', updatePreview);
+        document.getElementById('borderToggle').addEventListener('change', updatePreview);
+
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            btn.classList.add('active');
+            currentTab = tab;
+        }
+
+        function setupPreview() {
+            const qaTab = currentTab === 'qa-tab';
+            const questionText = document.getElementById('questionText').value.trim();
+            const answerText = document.getElementById('answerText').value.trim();
+            const storyText = document.getElementById('storyText').value.trim();
+
+            if ((qaTab && (!questionText || !answerText)) || (!qaTab && !storyText)) {
+                alert('Please enter text content first!');
+                return;
+            }
+
+            updatePreview();
+            playButton.classList.add('show');
+            alert('Preview is ready! Resize if needed, then click PLAY to record.');
+        }
+
+        function updatePreview() {
+            const qaTab = currentTab === 'qa-tab';
+            const font = document.getElementById('fontSelect').value;
+            const fontSize = document.getElementById('fontSize').value;
+            const qColor = document.getElementById('qColor').value;
+            const aColor = document.getElementById('aColor').value;
+            const storyColor = document.getElementById('storyColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const bgImage = document.getElementById('bgImage').value;
+
+            if (qaTab) {
+                const questionText = document.getElementById('questionText').value;
+                const answerText = document.getElementById('answerText').value;
+                scrollingText.innerHTML = formatScriptForScroll(
+                    questionText, answerText, qColor, aColor, fontSize, font
+                );
+            } else {
+                const storyText = document.getElementById('storyText').value;
+                scrollingText.innerHTML = `<p style="color: ${storyColor};">${storyText}</p>`;
+            }
+
+            scrollingText.style.fontFamily = font;
+            scrollingText.style.fontSize = fontSize + 'px';
+            displayArea.style.backgroundColor = bgColor;
+            displayArea.style.backgroundImage = bgImage ? `url(${bgImage})` : 'none';
+            displayArea.style.backgroundSize = 'cover';
+            displayArea.style.backgroundPosition = 'center';
+
+            if (document.getElementById('borderToggle').checked) {
+                displayArea.classList.add('border-animated');
+            } else {
+                displayArea.classList.remove('border-animated');
+            }
+
+            applyTextSpacing();
+        }
+
+        function formatScriptForScroll(question, answer, qColor, aColor, fontSize, font) {
+            return `
+                <p style="color: ${qColor}; font-size: ${fontSize}px;">Q: ${question}</p>
+                <p style="color: ${aColor}; font-size: ${fontSize}px;">A: ${answer}</p>
+            `;
+        }
+
+        function applyTextSpacing() {
+            const lineHeight = document.getElementById('lineHeight').value;
+            const letterSpacing = document.getElementById('letterSpacing').value;
+            const textMargin = document.getElementById('textMargin').value;
+            
+            scrollingText.style.lineHeight = lineHeight;
+            scrollingText.style.letterSpacing = letterSpacing + 'px';
+            
+            const paragraphs = scrollingText.querySelectorAll('p');
+            paragraphs.forEach(p => {
+                p.style.margin = textMargin + 'px 0';
+            });
+        }
+
+        function startScroll() {
+            if (isPlaying) return;
+            isPlaying = true;
+            playButton.classList.remove('show');
+
+            scrollingText.style.animation = 'none';
+            setTimeout(() => {
+                const totalDistance = displayArea.offsetHeight + scrollingText.offsetHeight;
+                const speedFactor = document.getElementById('speedInput').value;
+                const duration = totalDistance / speedFactor;
+
+                scrollingText.style.animation = `scroll ${duration}s linear forwards`;
+                applyTextSpacing();
+
+                scrollingText.onanimationend = () => {
+                    isPlaying = false;
+                    playButton.classList.add('show');
+                    scrollingText.style.animation = 'none';
+                    scrollingText.style.top = '100%';
+                };
+            }, 10);
+        }
+
+        function stopScroll() {
+            scrollingText.style.animation = 'none';
+            scrollingText.style.top = '100%';
+            isPlaying = false;
+            playButton.classList.add('show');
+        }
+
+        // Add scroll animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes scroll {
+                from { top: 100%; }
+                to { top: -100%; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        updatePreview();
+    </script>
+</body>
+</html>
