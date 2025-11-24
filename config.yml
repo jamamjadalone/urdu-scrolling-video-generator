@@ -1,0 +1,32 @@
+# GitHub Pages Configuration
+title: Urdu Scrolling Text Video Generator
+description: Create professional Urdu scrolling text videos optimized for YouTube monetization
+author: Urdu Video Generator
+url: https://jamamjadalone.github.io/urdu-scrolling-video-generator
+
+# Build settings
+theme: jekyll-theme-cayman
+markdown: kramdown
+encoding: utf-8
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+
+# SEO
+google_site_verification: "your-google-verification-code-here"
+
+# Analytics (optional - add your own ID)
+google_analytics: "your-google-analytics-id-here"
+
+# Keep files
+keep_files:
+  - assets
+  - docs
+
+# Exclude from processing
+exclude:
+  - .gitignore
+  - node_modules
+  - package.json
+  - package-lock.json

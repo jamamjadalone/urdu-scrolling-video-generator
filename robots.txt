@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+
+Sitemap: https://jamamjadalone.github.io/urdu-scrolling-video-generator/sitemap.xml
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
