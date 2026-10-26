@@ -1,0 +1,26 @@
+{
+ "version": 1,
+ "created": "2026-10-26T15:02:06",
+ "count": 18,
+ "note": "Issues FixMySlop accepted as pre-existing. Regenerate with `fixmyslop baseline`.",
+ "fingerprints": [
+  "21119db639d1c2ff5053",
+  "2a4d7b9e3052ab9cf340",
+  "318e6d11d0f159824245",
+  "3299803db5340a385b36",
+  "36feb6ff7f9aaaba7ac0",
+  "388ed7bbf11438bdeffd",
+  "3c46ba3072d6b76828b6",
+  "64b6f19d10b18d53b73c",
+  "653c73e647669aac0fe0",
+  "677079989b206f3e6f7c",
+  "6a056f131d2389883b45",
+  "7bc18d4ae0d9905e19da",
+  "8b605af458dae72a30da",
+  "9e4c00b42e9d4c8abfd2",
+  "ad1a1fd6c02dd1217f49",
+  "d29b6028f67f7f41f7d3",
+  "db816ada45bd797e1b20",
+  "dbdc7c92473f8f9af6f3"
+ ]
+}
